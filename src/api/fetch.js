@@ -2,7 +2,7 @@ import 'whatwg-fetch'
 import { createStore } from 'redux'
 import reducer from '../redux/reducers'
 import { message } from 'antd'
-import qs from 'querystringify'
+import qs from 'querystring'
 import { createBrowserHistory } from 'history'
 import { setLoading, setUserInfo } from '../redux/actions/common'
 let store = createStore(reducer)
@@ -27,7 +27,7 @@ function Ajax(url, params, cfg) {
     let uri = baseURL + url
     const token = store.getState().token
     if (cfg.type === 'get') {
-        uri += qs.stringify(params, true)
+        uri += '?' + qs.stringify(params)
     } else if (cfg.type === 'post') {
         if (cfg.upload) {
             obj.body = params
@@ -55,28 +55,26 @@ function Ajax(url, params, cfg) {
                     })
                 }
             })
-            .then(res => {
-                console.log('请求成功', url, res)
-                if (res.code && res.code === 1) {
-                    resolve(res)
-                } else {
-                    if (res.code === 401) {
-                        localStorage.clear()
-                        sessionStorage.clear()
-                        store.dispatch(setUserInfo(null))
-                        browserHistory.replace('/')
+            .then(
+                res => {
+                    console.log('请求成功', url, res)
+                    if (res.code && res.code === 1) {
+                        resolve(res)
+                    } else {
+                        if (res.code === 401) {
+                            localStorage.clear()
+                            sessionStorage.clear()
+                            store.dispatch(setUserInfo(null))
+                            browserHistory.replace('/')
+                        }
+                        message.warning(res.msg)
+                        reject(res)
                     }
-                    message.warning(res.msg)
-                    reject(res)
+                },
+                e => {
+                    console.log(JSON.stringify(e))
                 }
-            })
-            .catch(e => {
-                store.dispatch(setLoading(false))
-                console.log('网络异常', url, e)
-                // MessageBox(e.message, '网络异常', 'error')
-                message.warning(e.msg)
-                reject(e)
-            })
+            )
     })
 }
 

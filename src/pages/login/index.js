@@ -34,4 +34,8 @@ class LoginContainer extends Component {
     }
 }
 
-export default withRouter(connect()(LoginContainer))
+const mapStateToProps = (state, ownProps) => ({
+    loading: state.loading
+})
+
+export default withRouter(connect(mapStateToProps)(LoginContainer))
