@@ -7,6 +7,7 @@ import reducer from './redux/reducers'
 import 'antd/dist/antd.css'
 import './style/index.css'
 
+console.log(123);
 const store = createStore(reducer)
 ReactDOM.render(
     <Provider store={store}>
