@@ -8,6 +8,7 @@ import 'antd/dist/antd.css'
 import './style/index.css'
 
 const store = createStore(reducer)
+console.log(213);
 ReactDOM.render(
     <Provider store={store}>
         <App />
