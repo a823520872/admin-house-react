@@ -9,6 +9,7 @@ import './style/index.css'
 
 console.log(123);
 const store = createStore(reducer)
+console.log(213);
 ReactDOM.render(
     <Provider store={store}>
         <App />
