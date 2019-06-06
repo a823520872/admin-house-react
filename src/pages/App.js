@@ -1,9 +1,11 @@
-import React, { Component } from 'react'
-import { Router, Route } from 'react-router-dom'
 import { connect } from 'react-redux'
-import '../style/App.css'
 import { createBrowserHistory } from 'history'
-import Login from './login/index'
+import { Router, Route } from 'react-router-dom'
+import React, { Component } from 'react'
+
+import Login from './Login/index'
+
+import '../style/App.css'
 
 const browserHistory = createBrowserHistory()
 
@@ -11,9 +13,7 @@ class App extends Component {
     render() {
         return (
             <Router history={browserHistory}>
-                {/* {this.props.userinfo ? <Route path="/" component={Home} /> :  */}
-                <Route path="/" component={Login} />
-                {/* } */}
+                <Route path="/" component={this.props.userinfo ? Home : Login} />
             </Router>
         )
     }

@@ -1,6 +1,5 @@
-import React from 'react'
-
 import { Card, Form, Input, Button } from 'antd'
+import React from 'react'
 
 const Login = ({ loading, form, form: { getFieldDecorator }, handleInput, handleSubmit }) => (
     <Card title="村里租房管理系统" className="login">

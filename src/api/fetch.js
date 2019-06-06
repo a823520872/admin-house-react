@@ -1,10 +1,12 @@
 import 'whatwg-fetch'
+import { createBrowserHistory } from 'history'
 import { createStore } from 'redux'
-import reducer from '../redux/reducers'
 import { message } from 'antd'
 import qs from 'querystring'
-import { createBrowserHistory } from 'history'
+
 import { setLoading, setUserInfo } from '../redux/actions/common'
+import reducer from '../redux/reducers'
+
 let store = createStore(reducer)
 
 const isPro = process.env.NODE_ENV === 'production'

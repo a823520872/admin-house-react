@@ -1,6 +1,7 @@
-import React, { Component } from 'react'
-import { withRouter } from 'react-router'
 import { connect } from 'react-redux'
+import { withRouter } from 'react-router'
+import React, { Component } from 'react'
+
 import { setUserInfo, setToken } from '../../redux/actions/common'
 import api from '../../api/index'
 import Login from './login'
